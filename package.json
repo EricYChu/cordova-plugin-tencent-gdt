@@ -1,0 +1,46 @@
+{
+  "name": "cordova-plugin-tencent-gdt",
+  "version": "1.0.0",
+  "description": "Cordova Tencent GDT Plugin.",
+  "cordova": {
+    "id": "cordova-plugin-tencent-gdt",
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-ios",
+    "cordova-android",
+    "tencent-gdt"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=9.0.0"
+    },
+    {
+      "name": "cordova-ios",
+      "version": ">=6.0.0"
+    },
+    {
+      "name": "cordova-android",
+      "version": ">=9.0.0"
+    }
+  ],
+  "author": {
+    "name" : "Eric Zhu",
+    "email" : "eric@zhu.email",
+    "url" : "https://github.com/EricYChu"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/EricYChu/cordova-plugin-tencent-gdt#readme",
+  "bugs": {
+    "url": "https://github.com/EricYChu/cordova-plugin-tencent-gdt/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EricYChu/cordova-plugin-tencent-gdt.git"
+  }
+}

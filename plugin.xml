@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<plugin id="cordova-plugin-tencent-gdt"
+        version="1.0.0"
+        xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <name>TencentGDT</name>
+    <author>Eric Zhu</author>
+    <description>Cordova Tencent GDT Plugin.</description>
+    <license>MIT</license>
+
+    <repo>https://github.com/EricYChu/cordova-plugin-tencent-gdt.git</repo>
+    <issue>https://github.com/EricYChu/cordova-plugin-tencent-gdt/issues</issue>
+
+    <engines>
+        <engine name="cordova" version=">=9.0.0"/>
+        <engine name="cordova-ios" version=">=6.0.0"/>
+        <engine name="cordova-android" version=">=9.0.0"/>
+    </engines>
+
+    <js-module name="TencentGDT" src="www/tencent-gdt.js">
+        <clobbers target="TencentGDT"/>
+    </js-module>
+
+    <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="TencentGDT">
+                <param name="android-package" value="cordova.plugins.tencentgdt.CDVTencentGDT"/>
+                <param name="onload" value="true"/>
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.INTERNET"/>
+            <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+            <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <provider android:name="com.qq.e.comm.GDTFileProvider" android:authorities="${applicationId}.gdt.fileprovider" android:exported="false" android:grantUriPermissions="true">
+                <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/gdt_file_path"/>
+            </provider>
+
+            <service android:name="com.qq.e.comm.DownloadService" android:exported="false"/>
+            <activity android:name="com.qq.e.tg.ADActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenSize"/>
+            <activity android:name="com.qq.e.tg.PortraitADActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:screenOrientation="portrait"/>
+            <activity android:name="com.qq.e.tg.LandscapeADActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:screenOrientation="landscape"/>
+        </config-file>
+
+        <source-file src="src/android/CDVTencentGDT.java" target-dir="src/cordova/plugins/tencentgdt"/>
+        <source-file src="src/android/AdFragment.java" target-dir="src/cordova/plugins/tencentgdt"/>
+        <source-file src="src/android/BannerAdFragment.java" target-dir="src/cordova/plugins/tencentgdt"/>
+        <source-file src="src/android/InterstitialAdFragment.java" target-dir="src/cordova/plugins/tencentgdt"/>
+        <source-file src="src/android/SplashAdFragment.java" target-dir="src/cordova/plugins/tencentgdt"/>
+
+        <source-file src="src/android/res/xml/tencentgdt_file_paths.xml" target-dir="res/xml"/>
+        <framework src="src/android/build.gradle" custom="true" type="gradleReference"/>
+    </platform>
+
+    <platform name="ios">
+        <config-file parent="/*" target="config.xml">
+            <feature name="TencentGDT">
+                <param name="ios-package" value="CDVTencentGDT"/>
+                <param name="onload" value="true"/>
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/CDVTencentGDT.h"/>
+        <source-file src="src/ios/CDVTencentGDT.m"/>
+
+        <podspec>
+            <config>
+                <source url="https://github.com/CocoaPods/Specs.git"/>
+            </config>
+            <pods use-frameworks="true">
+                <pod name="GDTMobSDK" spec="~> 4.11.12"/>
+            </pods>
+        </podspec>
+    </platform>
+</plugin>
